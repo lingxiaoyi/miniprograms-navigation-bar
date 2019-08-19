@@ -8,7 +8,7 @@ Navigation 是小程序的顶部导航组件，当页面配置 navigationStyle �
 
 ## 引入组件
 
-### 方式一
+### 方式一 (建议)
 
 ```bash
 npm install miniprograms-navigation-bar --save
