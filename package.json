@@ -1,6 +1,6 @@
 {
   "name": "miniprograms-navigation-bar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "miniprogram custom component 可自定义返回事件 返回home 搜索框 自定义左中右",
   "main": "miniprogram_dist/index.js",
   "scripts": {
@@ -26,7 +26,7 @@
   "miniprogram": "miniprogram_dist",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wechat-miniprogram/navigation-bar.git"
+    "url": "https://github.com/lingxiaoyi/miniprograms-navigation-bar"
   },
   "author": "lingxiaoyi",
   "license": "MIT",

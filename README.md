@@ -8,7 +8,31 @@ Navigation 是小程序的顶部导航组件，当页面配置 navigationStyle �
 
 ## 引入组件
 
+### 方式一
+
+```bash
+npm install miniprograms-navigation-bar --save
+```
+
+- 点击开发者工具中的菜单栏：工具 --> 构建 npm
+![构建 npm](https://user-gold-cdn.xitu.io/2019/8/19/16ca8a4814418214?w=207&h=441&f=png&s=31449)
+- 勾选“使用 npm 模块”选项
+![使用 npm 模块](https://user-gold-cdn.xitu.io/2019/8/19/16ca8a4cf34f148e?w=246&h=184&f=png&s=8131)
 在 page.json 中引入组件
+
+```bash
+{
+  "usingComponents": {
+    "navBar": "miniprograms-navigation-bar"
+  }
+}
+```
+
+>备注:如发现一些编译问题，请重启开发工具试试
+
+### 方式二
+
+复制代码过去，在 page.json 中引入组件，注意引入的路径
 
 ```bash
 {
