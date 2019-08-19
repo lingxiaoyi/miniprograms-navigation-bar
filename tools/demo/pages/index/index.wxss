@@ -1,0 +1,4 @@
+.lxy-nav-bar-search__input {
+  display: block;
+  flex: none;
+}
