@@ -10,7 +10,13 @@ Component({
     },
     background: {
       type: String,
-      value: 'rgba(255, 255, 255, 1)'
+      value: 'rgba(255, 255, 255, 1)',
+      observer: '_showChange'
+    },
+    backgroundColorTop: {
+      type: String,
+      value: 'rgba(255, 255, 255, 1)',
+      observer: '_showChangeBackgroundColorTop'
     },
     color: {
       type: String,
@@ -124,6 +130,9 @@ Component({
         })
       }
     },
+    _showChange() {
+      this.setStyle()
+    },
     // 返回事件
     back() {
       this.triggerEvent('back', {delta: this.data.delta})
@@ -134,16 +143,56 @@ Component({
     search() {
       this.triggerEvent('search', {})
     },
+    getMenuButtonBoundingClientRect(systemInfo) {
+      const ios = !!(systemInfo.system.toLowerCase().search('ios') + 1)
+      let rect
+      try {
+        rect = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null
+        if (rect === null) {
+          throw new Error('getMenuButtonBoundingClientRect error')
+        }
+      } catch (error) {
+        let gap = '' // 胶囊按钮上下间距 使导航内容居中
+        let width = 96 // 胶囊的宽度
+        if (systemInfo.platform === 'android') {
+          gap = 8
+          width = 96
+        } else if (systemInfo.platform === 'devtools') {
+          if (ios) {
+            gap = 5.5 // 开发工具中ios手机
+          } else {
+            gap = 7.5 // 开发工具中android和其他手机
+          }
+        } else {
+          gap = 4
+          width = 88
+        }
+        if (!systemInfo.statusBarHeight) {
+          // 开启wifi的情况下修复statusBarHeight值获取不到
+          systemInfo.statusBarHeight = systemInfo.screenHeight - systemInfo.windowHeight - 20
+        }
+        rect = {
+          // 获取不到胶囊信息就自定义重置一个
+          bottom: systemInfo.statusBarHeight + gap + 32,
+          height: 32,
+          left: systemInfo.windowWidth - width - 10,
+          right: systemInfo.windowWidth - 10,
+          top: systemInfo.statusBarHeight + gap,
+          width
+        }
+        console.log('error', error)
+        console.log('rect', rect)
+      }
+      return rect
+    },
     getSystemInfo() {
-      /* global getApp:true */
       const app = getApp()
       if (app.globalSystemInfo && !app.globalSystemInfo.ios) {
         return app.globalSystemInfo
       } else {
         const systemInfo = wx.getSystemInfoSync()
         const ios = !!(systemInfo.system.toLowerCase().search('ios') + 1)
-        const rect = wx.getMenuButtonBoundingClientRect
-          ? wx.getMenuButtonBoundingClientRect() : null
+        const rect = this.getMenuButtonBoundingClientRect(systemInfo)
 
         let navBarHeight = ''
         if (!systemInfo.statusBarHeight) {
@@ -167,10 +216,12 @@ Component({
           }
         }
         systemInfo.navBarHeight = navBarHeight // 导航栏高度不包括statusBarHeight
-        systemInfo.capsulePosition = rect // 右上角胶囊按钮信息
+        systemInfo.capsulePosition = rect
         systemInfo.ios = ios // 是否ios
 
         app.globalSystemInfo = systemInfo // 将信息保存到全局变量中,后边再用就不用重新异步获取了
+
+        // console.log('systemInfo', systemInfo);
         return systemInfo
       }
     }

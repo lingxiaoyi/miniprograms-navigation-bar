@@ -15,10 +15,10 @@ npm install miniprograms-navigation-bar --save
 ```
 
 - 点击开发者工具中的菜单栏：工具 --> 构建 npm
-![构建 npm](https://user-gold-cdn.xitu.io/2019/8/19/16ca8a4814418214?w=207&h=441&f=png&s=31449)
+  ![构建 npm](https://user-gold-cdn.xitu.io/2019/8/19/16ca8a4814418214?w=207&h=441&f=png&s=31449)
 - 勾选“使用 npm 模块”选项
-![使用 npm 模块](https://user-gold-cdn.xitu.io/2019/8/19/16ca8a4cf34f148e?w=246&h=184&f=png&s=8131)
-在 page.json 中引入组件
+  ![使用 npm 模块](https://user-gold-cdn.xitu.io/2019/8/19/16ca8a4cf34f148e?w=246&h=184&f=png&s=8131)
+  在 page.json 中引入组件
 
 ```bash
 {
@@ -28,7 +28,7 @@ npm install miniprograms-navigation-bar --save
 }
 ```
 
->备注:如发现一些编译问题，请重启开发工具试试
+> 备注:如发现一些编译问题，请重启开发工具试试
 
 ### 方式二
 
@@ -51,20 +51,23 @@ npm install miniprograms-navigation-bar --save
 
 ## 属性列表
 
-| 属性       | 类型         | 默认值   | 必填 | 说明                                                                                      |
-| ---------- | ------------ | -------- | ---- | ----------------------------------------------------------------------------------------- |
-| ext-class  | string       |          | 否   | 添加在组件内部结构的 class，可用于修改组件内部的样式                                      |
-| title      | string       |          | 否   | 导航标题，如果不提供，则名为 center 的 slot 有效                                          |
-| background | string       | #ffffff  | 否   | 导航背景色                                                                                |
-| color      | string       | #000000  | 否   | 导航字体颜色                                                                              |
-| iconTheme  | string       | black    | 否   | 主题图标和字体颜色,当背景色为深色时,可以设置'white'                                       |
-| back       | boolean      | false    | 否   | 是否显示返回按钮，默认点击按钮会执行 navigateBack，如果为 false，则名为 left 的 slot 有效 |
-| home       | boolean      | false    | 否   | 是否显示 home 按钮，执行方法自定义,或者看例子                                             |
-| searchBar  | boolean      | false    | 否   | 是否显示搜索框，默认点击按钮会执行 bindsearch，如果为 false，则名为 center 的 slot 有效   |
-| searchText | string       | 点我搜索 | 否   | 搜索框文字                                                                                |
-| bindhome   | eventhandler |          | 否   | 在 home 为 true 时，点击 home 按钮触发此事件                                              |
-| bindback   | venthandler  |          | 否   | 在 back 为 true 时，点击 back 按钮触发此事件，detail 包含 delta                           |
-| bindsearch | eventhandler |          | 否   | 在 searchBar 为 true 时，点击 search 按钮触发此事件                                       |
+| 属性               | 类型         | 默认值     | 必填 | 说明                                                                                      |
+| ------------------ | ------------ | ---------- | ---- | ----------------------------------------------------------------------------------------- |
+| ext-class          | string       |            | 否   | 添加在组件内部结构的 class，可用于修改组件内部的样式                                      |
+| title              | string       |            | 否   | 导航标题，如果不提供，则名为 center 的 slot 有效                                          |
+| background         | string       | #ffffff    | 否   | 导航背景色                                                                                |
+| backgroundColorTop | string       | background | 否   | 导航下拉下方背景色,详细参考下方                                                           |
+| color              | string       | #000000    | 否   | 导航字体颜色                                                                              |
+| iconTheme          | string       | black      | 否   | 主题图标和字体颜色,当背景色为深色时,可以设置'white'                                       |
+| back               | boolean      | false      | 否   | 是否显示返回按钮，默认点击按钮会执行 navigateBack，如果为 false，则名为 left 的 slot 有效 |
+| home               | boolean      | false      | 否   | 是否显示 home 按钮，执行方法自定义,或者看例子                                             |
+| searchBar          | boolean      | false      | 否   | 是否显示搜索框，默认点击按钮会执行 bindsearch，如果为 false，则名为 center 的 slot 有效   |
+| searchText         | string       | 点我搜索   | 否   | 搜索框文字                                                                                |
+| bindhome           | eventhandler |            | 否   | 在 home 为 true 时，点击 home 按钮触发此事件                                              |
+| bindback           | venthandler  |            | 否   | 在 back 为 true 时，点击 back 按钮触发此事件，detail 包含 delta                           |
+| bindsearch         | eventhandler |            | 否   | 在 searchBar 为 true 时，点击 search 按钮触发此事件                                       |
+
+注:backgroundColorTop[见 issue 问题](https://github.com/lingxiaoyi/Taro-navigation-bar/issues/15)
 
 ## Slot
 
@@ -91,8 +94,8 @@ npm install miniprograms-navigation-bar --save
 
 ## 备注
 
-- 为什么我没添加滚动渐变的例子,因为用JS实现滚动渐变,在我的Android千元测试机上,效果不能直视,故取消.如有需要可以添加样式自己实现滚动渐变.
-- 为什么不支持navbar取消固定定位的功能.因为我观察了市场上98%以上的小程序,都是固定navbar,故先不尝试开发此功能,如果需求很大.可以考虑最近版本开发.
+- 渐变和动态修改背景色请参考例子 10,ios 机子会出现滚动渐变颜色加载出来不能消失的问题,暂时没想到解决办法,这是微信浏览器渲染的问题,社区里面相关问题[地址](https://developers.weixin.qq.com/community/develop/doc/0000acae7649d80541b896ca957000)
+- getMenuButtonBoundingClientRect 胶囊按钮信息获取不到或者此方法报错问题已修复 [获取菜单报错，需要捕捉异常和兼容版本](https://github.com/lingxiaoyi/navigation-bar/issues/14)[导航栏渲染不出来](https://github.com/lingxiaoyi/navigation-bar/issues/13)
 
 ## 测试信息
 
