@@ -180,8 +180,6 @@ Component({
           top: systemInfo.statusBarHeight + gap,
           width
         }
-        console.log('error', error)
-        console.log('rect', rect)
       }
       return rect
     },
