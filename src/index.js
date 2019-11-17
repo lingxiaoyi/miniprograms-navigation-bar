@@ -151,6 +151,10 @@ Component({
         if (rect === null) {
           throw new Error('getMenuButtonBoundingClientRect error')
         }
+        // 取值为0的情况
+        if (!rect.width) {
+          throw new Error('getMenuButtonBoundingClientRect error')
+        }
       } catch (error) {
         let gap = '' // 胶囊按钮上下间距 使导航内容居中
         let width = 96 // 胶囊的宽度
