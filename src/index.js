@@ -143,6 +143,9 @@ Component({
     search() {
       this.triggerEvent('search', {})
     },
+    checkRect(rect) { // 胶囊信息4种任一属性为0返回true
+      return !rect.width || !rect.top || !rect.left || !rect.height
+    },
     getMenuButtonBoundingClientRect(systemInfo) {
       const ios = !!(systemInfo.system.toLowerCase().search('ios') + 1)
       let rect
@@ -151,8 +154,8 @@ Component({
         if (rect === null) {
           throw new Error('getMenuButtonBoundingClientRect error')
         }
-        // 取值为0的情况
-        if (!rect.width) {
+        // 取值为0的情况  有可能width不为0 top为0的情况
+        if (this.checkRect(rect)) {
           throw new Error('getMenuButtonBoundingClientRect error')
         }
       } catch (error) {
